@@ -1,0 +1,9 @@
+{ "node":
+  { "host": "<%= fetch(:nodejs_host) %>"
+  , "port": <%= fetch(:nodejs_port) %>
+  }
+, "log":
+  { "redirect": "<%= fetch(:deploy_to) %>/shared/log/redirect.json"
+  , "error": "<%= fetch(:deploy_to) %>/shared/log/error.json"
+  }
+}

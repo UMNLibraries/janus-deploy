@@ -1,0 +1,8 @@
+# This file has been automatically generated. Please do NOT edit it manually!
+PassengerAppEnv <%= fetch(:stage) %>
+Alias /<%= fetch(:application) %> <%= fetch(:deploy_to) %>/current/public
+<Directory <%= fetch(:deploy_to) %>/current/public>
+  PassengerNodejs <%= fetch(:nodejs_exe) %>
+  PassengerAppRoot <%= fetch(:deploy_to) %>/current
+  PassengerBaseURI /<%= fetch(:application) %>
+</Directory>

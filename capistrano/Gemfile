@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+gem 'capistrano', '~> 3.2.0'
+gem 'capistrano-rbenv', '~> 2.0'
+# We must use capistrano-passenger 0.0.2 for now, because later versions use
+# Passenger's new restart mechanism, which requires sudo, and is therefore
+# incompatible with our OIT VM setup. See this issue for details:
+# https://github.com/capistrano/passenger/issues/2 
+gem 'capistrano-passenger', '0.0.2'
+gem 'capistrano-npm'
