@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'janus'
-set :repo_url, 'git@github.com:UMNLibraries/janus.git'
+set :repo_url, 'git@github.com:UMNLibraries/janus-deploy.git'
 set :branch, 'master'
 
 # Default branch is :master
