@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path');
 const config = require('config');
+const uriPathPrefix = (config.has('uriPathPrefix')) ? config.get('uriPathPrefix') : '/';
 const host = (config.has('node.host')) ? config.get('node.host') : '127.0.0.1';
 const port = (config.has('node.port')) ? config.get('node.port') : 1337;
 const errorLogFile = (config.has('log.error')) ? config.get('log.error') : path.resolve(__dirname, 'log/error.json');
@@ -41,5 +42,6 @@ const app = janus({
       path: redirectLogFile,
     }],
   },
+  uriPathPrefix: uriPathPrefix,
 });
 app.listen(port);
