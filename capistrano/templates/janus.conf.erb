@@ -5,4 +5,21 @@ Alias /<%= fetch(:application) %> <%= fetch(:deploy_to) %>/current/public
   PassengerNodejs <%= fetch(:nodejs_exe) %>
   PassengerAppRoot <%= fetch(:deploy_to) %>/current
   PassengerBaseURI /<%= fetch(:application) %>
+
 </Directory>
+<Location /janus>
+  # Janus needs this, but for most (if not all) other apps, it should be off.
+  # Therefore, we put it here, to turn it on only for Janus:
+  ShibUseHeaders On
+
+  # Why we put this in a Location section:
+  # "Note that Apache has complex (and unclear at times) rules for combining
+  # settings across all those different sections. The SP itself doesn't impact
+  # these rules; Apache is doing all the merging and evaluation and the SP
+  # just performs based on the resulting merge. One particular quirk seems to
+  # be that mod_rewrite can cause problems with anything but <Location>-based
+  # settings. It seems to ignore settings applied based on physical path when
+  # it creates subrequests, so the original request seems to have the intended
+  # settings, but the rewritten request doesn't."
+  # -- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig
+</Location>
