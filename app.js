@@ -10,6 +10,7 @@ const redirectLogFile = (config.has('log.redirect')) ? config.get('log.redirect'
 const uriFactoryPlugins = require('@nihiliad/janus-uri-factory-plugins');
 const janus = require('@nihiliad/janus').methods({
   redirectLogEvent (ctx) {
+    console.log(ctx);
     return {
       'request': {
         'method': ctx.req.method,
@@ -17,6 +18,9 @@ const janus = require('@nihiliad/janus').methods({
         'referer': ctx.req.headers['referer'],
         'userAgent': ctx.req.headers['user-agent'],
         'umnRole': ctx.req.headers['umnrole'],
+      },
+      'response': {
+        'location': ctx.response.headers['location'],
       },
       'target': ctx.request.query.target,
       'search': ctx.request.query.search,

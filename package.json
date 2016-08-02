@@ -1,6 +1,6 @@
 {
   "name": "janus-deploy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Deploys the Janus web application for UMN Libraries.",
   "main": "app.js",
   "scripts": {
