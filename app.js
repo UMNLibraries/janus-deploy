@@ -17,7 +17,9 @@ const janus = require('@nihiliad/janus').methods({
         'url': ctx.req.url,
         'referer': ctx.req.headers['referer'],
         'userAgent': ctx.req.headers['user-agent'],
-        'umnRole': ctx.req.headers['umnrole'],
+        'umnRole': ctx.req.headers['umnrole'].split(';').filter(function(i) {
+          return i.length > 0;
+        }),
       },
       'response': {
         'location': ctx.response.headers['location'],
