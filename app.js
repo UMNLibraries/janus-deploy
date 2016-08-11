@@ -10,11 +10,12 @@ const redirectLogFile = (config.has('log.redirect')) ? config.get('log.redirect'
 const uriFactoryPlugins = require('@nihiliad/janus-uri-factory-plugins');
 const janus = require('@nihiliad/janus').methods({
   redirectLogEvent (ctx, defaultEvent) {
-    if (ctx.request.header['umnrole']) {
-      defaultEvent.request['umnRole'] = ctx.request.header['umnrole'].split(';').filter(function(i) {
-        return i.length > 0;
-      });
-    }
+    ['umnLibAccess', 'umnRole'].map(key => {
+      const lcKey = key.toLowerCase();
+      defaultEvent.user[key] = (ctx.request.header[lcKey])
+        ? ctx.request.header[lcKey].split(';').filter((i) => i.length > 0)
+        : [];
+    });
     return defaultEvent;
   },
 });

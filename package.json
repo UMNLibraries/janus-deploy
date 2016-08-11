@@ -1,13 +1,15 @@
 {
   "name": "janus-deploy",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Deploys the Janus web application for UMN Libraries.",
   "main": "app.js",
   "scripts": {
     "lint": "eslint .",
     "test": "tape test/*.js"
   },
-  "engines" : { "node" : ">=6.0.0" },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:UMNLibraries/janus-deploy.git"
@@ -28,13 +30,13 @@
     "cheerio": "^0.17.0",
     "eslint": "^2.11.0",
     "eslint-config-standard": "^5.3.1",
-    "eslint-plugin-standard": "^1.3.2",
     "eslint-plugin-promise": "1.0.8",
+    "eslint-plugin-standard": "^1.3.2",
     "request": "^2.44.0"
   },
   "dependencies": {
     "config": "^1.12.0",
-    "@nihiliad/janus": "^0.1.0",
+    "@nihiliad/janus": "^1.0.0",
     "@nihiliad/janus-uri-factory-plugins": "^0.1.0"
   }
 }
