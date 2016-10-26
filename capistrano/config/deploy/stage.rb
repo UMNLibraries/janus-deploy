@@ -8,7 +8,7 @@
 #role :web, "#{fetch(:deploy_user)}@orbis05.lib.umn.edu"
 #role :db,  %w{deploy@example.com}
 
-set :nodejs_version, 'v6.7.0'
+set :nodejs_version, 'v6.9.0'
 set :ruby_version, '2.2.0'
 
 # Extended Server Syntax

@@ -1,6 +1,6 @@
 {
   "name": "janus-deploy",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Deploys the Janus web application for UMN Libraries.",
   "main": "app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "tape test/*.js"
   },
   "engines": {
-    "node": ">=6.7.0"
+    "node": ">=6.9.0"
   },
   "repository": {
     "type": "git",
