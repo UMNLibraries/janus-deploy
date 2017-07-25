@@ -18,6 +18,7 @@ set :tmp_dir, "/home/#{fetch(:deploy_user)}/tmp"
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, "/swadm/deploy/#{fetch(:application)}"
+set :branch, 'new_primo_ui'
 
 # Default value for :scm is :git
 # set :scm, :git
