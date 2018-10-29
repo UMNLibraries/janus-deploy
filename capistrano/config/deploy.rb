@@ -17,7 +17,7 @@ set :deploy_user, 'swadm'
 set :tmp_dir, "/home/#{fetch(:deploy_user)}/tmp"
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, "/swadm/deploy/#{fetch(:application)}"
+set :deploy_to, "/swadm/var/www/deploy/#{fetch(:application)}"
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -45,14 +45,8 @@ set :deploy_to, "/swadm/deploy/#{fetch(:application)}"
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :anyenv_root, '/swadm/anyenv/envs'
-
-# Here we use lambdas to pull in stage-specific variables. See: http://capistranorb.com/documentation/faq/how-can-i-access-stage-configuration-variables/
-set :nodejs_exe, -> { "#{fetch(:anyenv_root)}/ndenv/versions/#{fetch(:nodejs_version)}/bin/node" }
-set :rbenv_ruby, -> { fetch(:ruby_version) }
-
-# Anyenv places rbenv into /swadm/anyenv/envs/rbenv
-set :rbenv_custom_path, "#{fetch(:anyenv_root)}/rbenv"
+# NodeJS path
+set :nodejs_exe, '/swadm/bin/node'
 
 # Default is :app, but we need to ensure that we restart
 # passenger on all instances of apache, and we use the :web
@@ -92,7 +86,7 @@ set(:entry_points, %w(
 set(:external_symlinks, [
   {
     source: 'config/httpd/janus.conf',
-    link: '/swadm/etc/httpd/conf.d/stacks.d/janus.conf'
+    link: '/swadm/etc/httpd/vhosts.d/stacks.d/janus.conf'
   },
 ])
 set :external_symlinks_roles, [:web]
@@ -103,17 +97,14 @@ namespace :deploy do
   after 'deploy:process_templates', 'deploy:create_external_symlinks'
 
   desc 'Gracefully restart Apache'
-  # Previously this was httpd_reload, but Aapche actually can't reload its config
-  # without restarting: https://blogs.oracle.com/oswald/entry/urban_legends_apache_reload_ed
-  task :httpd_graceful do
+  task :httpd_reload do
     on roles(:web), in: :sequence, wait: 5 do
-      # Note: A command executed via sudo must match exactly what is in the
-      # sudoers file, or the user will be prompted for a password.
-      execute :sudo, '/sbin/service httpd graceful'
+      # Reload apache config (equivalent to graceful in prior distributions)
+      execute :sudo, 'systemctl reload httpd'
     end
   end
 
-  after 'deploy:create_external_symlinks', :httpd_graceful
+  after 'deploy:create_external_symlinks', :httpd_reload
 
   desc 'Restart application'
   task :restart do
