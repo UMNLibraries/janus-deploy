@@ -64,11 +64,18 @@ set :nodejs_port, 1337
 set(:templates, [
   {
     from: 'templates/janus.conf.erb',
-    to: 'config/httpd/janus.conf'
+    to: 'config/httpd/janus.conf',
+    mode: '0644'
   },
   {
     from: 'templates/default.json.erb',
-    to: 'config/default.json'
+    to: 'config/default.json',
+    mode: '0644'
+  },
+  {
+    from: 'templates/janus-logrotate.ini.erb',
+    to: 'config/janus-logrotate.ini',
+    mode: '0644'
   },
 ])
 set :templates_roles, [:app]
@@ -82,27 +89,37 @@ set(:entry_points, %w(
 # link: absolute paths
 set(:external_symlinks, [
   {
-    source: 'config/httpd/janus.conf',
+    source: "#{release_path}/config/httpd/janus.conf",
     link: '/swadm/etc/httpd/vhosts.d/stacks.d/janus.conf'
+  },
+  {
+    source: "#{release_path}/config/janus-logrotate.ini",
+    link: '/swadm/etc/logrotate.d/janus-logrotate.ini'
   },
 ])
 set :external_symlinks_roles, [:web]
 
 namespace :deploy do
+  namespace :umnlib do
+    desc 'Create application log directory'
+    task :create_logdir do
+      on roles(:app) do
+        execute :mkdir, '-p', "#{shared_path}/log"
+        execute :chmod, '2775', "#{shared_path}/log"
+      end
+    end
 
-  after 'deploy:symlink:release', 'deploy:process_templates'
-  after 'deploy:process_templates', 'deploy:create_external_symlinks'
-
-  desc 'Gracefully restart Apache'
-  task :httpd_reload do
-    on roles(:web), in: :sequence, wait: 5 do
-      # Reload apache config (equivalent to graceful in prior distributions)
-      execute :sudo, 'systemctl reload httpd'
+    desc 'Gracefully restart Apache'
+    task :httpd_reload do
+      on roles(:web), in: :sequence, wait: 5 do
+        # Reload apache config (equivalent to graceful in prior distributions)
+        execute :sudo, 'systemctl reload httpd'
+      end
     end
   end
+end
 
-  after 'deploy:create_external_symlinks', :httpd_reload
-
+namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -121,5 +138,9 @@ namespace :deploy do
       # end
     end
   end
-
 end
+
+before 'deploy:symlink:release', 'deploy:umnlib:create_logdir'
+after  'deploy:symlink:release', 'deploy:umnlib:process_templates'
+after  'deploy:umnlib:process_templates', 'deploy:umnlib:create_external_symlinks'
+after 'deploy:umnlib:create_external_symlinks', 'deploy:umnlib:httpd_reload'

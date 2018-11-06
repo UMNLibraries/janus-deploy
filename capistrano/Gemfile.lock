@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.umn.edu:Libraries/capistrano-umnlib-common.git
+  revision: 6464c9b1b3c3b1dfc8ffa05a1066365324c154ed
+  branch: master
+  specs:
+    capistrano-umnlib-common (1.0.0)
+      capistrano (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +38,7 @@ DEPENDENCIES
   capistrano (~> 3.11.0)
   capistrano-npm
   capistrano-passenger (= 0.0.2)
+  capistrano-umnlib-common (>= 1.0.0)!
 
 BUNDLED WITH
    1.16.1

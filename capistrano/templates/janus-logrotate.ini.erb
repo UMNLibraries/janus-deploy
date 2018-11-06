@@ -1,0 +1,8 @@
+<%= "#{shared_path}/log" %>/*json {
+  missingok
+  notifempty
+  # Can be processed as stats sooner if immediately compressed
+  nodelaycompress
+  daily
+  rotate 30
+}

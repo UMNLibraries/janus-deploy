@@ -6,3 +6,4 @@ gem 'capistrano', '~> 3.11.0'
 # https://github.com/capistrano/passenger/issues/2 
 gem 'capistrano-passenger', '0.0.2'
 gem 'capistrano-npm'
+gem 'capistrano-umnlib-common', '>= 1.0.0', git: 'git@github.umn.edu:Libraries/capistrano-umnlib-common.git', branch: 'master'
