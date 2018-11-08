@@ -18,8 +18,6 @@ set :nodejs_version, 'v6.9.0'
 
 #server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 server 'lib-stacks-dev-01.oit.umn.edu', user: fetch(:deploy_user), roles: %w{app web}
-# This was to prevent needlessly deploying twice to the shared mount:
-#server 'orbis08.lib.umn.edu', user: fetch(:deploy_user), roles: %w{web}, :no_release => true
 server 'lib-stacks-dev-02.oit.umn.edu', user: fetch(:deploy_user), roles: %w{app web}
 
 # Custom SSH Options
