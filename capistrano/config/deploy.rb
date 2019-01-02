@@ -91,16 +91,23 @@ set(:external_symlinks, [
   {
     source: "#{release_path}/config/httpd/janus.conf",
     link: '/swadm/etc/httpd/vhosts.d/stacks.d/janus.conf'
-  },
-  {
-    source: "#{release_path}/config/janus-logrotate.ini",
-    link: '/swadm/etc/logrotate.d/janus-logrotate.ini'
-  },
+  }
 ])
 set :external_symlinks_roles, [:web]
 
 namespace :deploy do
   namespace :umnlib do
+    # JME runs logrotate as root, so root must own configs in logrotate.d
+    # To avoid difficulties with a root-owned, symlinked from release file,
+    # it is copied to the actual logrotate location
+    desc 'Set root ownership on logrotate conf'
+    task :create_logrotate_conf do
+      on roles(:app) do
+        execute :sudo, "cp #{release_path}/config/janus-logrotate.ini /swadm/etc/logrotate.d/janus.ini"
+        execute :sudo, "chown root:#{fetch(:deploy_user)} /swadm/etc/logrotate.d/janus.ini"
+      end
+    end
+
     desc 'Create application log directory'
     task :create_logdir do
       on roles(:app) do
@@ -143,4 +150,5 @@ end
 before 'deploy:symlink:release', 'deploy:umnlib:create_logdir'
 after  'deploy:symlink:release', 'deploy:umnlib:process_templates'
 after  'deploy:umnlib:process_templates', 'deploy:umnlib:create_external_symlinks'
-after 'deploy:umnlib:create_external_symlinks', 'deploy:umnlib:httpd_reload'
+after  'deploy:umnlib:create_external_symlinks', 'deploy:umnlib:httpd_reload'
+after  'deploy:umnlib:process_templates', 'deploy:umnlib:create_logrotate_conf'
