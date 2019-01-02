@@ -1,4 +1,5 @@
 <%= "#{shared_path}/log" %>/*json {
+  su <%= fetch(:deploy_user) %> <%= fetch(:deploy_user) %>
   missingok
   notifempty
   # Can be processed as stats sooner if immediately compressed
