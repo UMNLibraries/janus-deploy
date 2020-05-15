@@ -8,7 +8,7 @@
     "test": "tape test/*.js"
   },
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=12.0.0"
   },
   "repository": {
     "type": "git",
@@ -28,15 +28,12 @@
   "devDependencies": {
     "blue-tape": "^0.1.10",
     "cheerio": "^0.17.0",
-    "eslint": "^2.11.0",
-    "eslint-config-standard": "^5.3.1",
-    "eslint-plugin-promise": "1.0.8",
-    "eslint-plugin-standard": "^1.3.2",
-    "request": "^2.44.0"
+    "request": "^2.44.0",
+    "standard": "^14.3.4"
   },
   "dependencies": {
     "config": "^1.12.0",
-    "@nihiliad/janus": "^1.1.0",
-    "@nihiliad/janus-uri-factory-plugins": "^1.5.0"
+    "@nihiliad/janus": "^2.0.0",
+    "@nihiliad/janus-uri-factory-plugins": "^2.0.0"
   }
 }
