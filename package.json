@@ -32,8 +32,8 @@
     "standard": "^14.3.4"
   },
   "dependencies": {
-    "@nihiliad/janus": "^2.0.0",
-    "@nihiliad/janus-uri-factory-plugins": "^2.0.0",
+    "@nihiliad/janus": "^2.0.1",
+    "@nihiliad/janus-uri-factory-plugins": "^2.0.1",
     "config": "^1.31.0"
   }
 }
