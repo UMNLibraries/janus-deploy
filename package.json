@@ -1,6 +1,6 @@
 {
   "name": "janus-deploy",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Deploys the Janus web application for UMN Libraries.",
   "main": "app.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "standard": "^14.3.4"
   },
   "dependencies": {
-    "@nihiliad/janus": "^2.0.1",
+    "@nihiliad/janus": "^2.0.2",
     "@nihiliad/janus-uri-factory-plugins": "^2.0.1",
     "config": "^1.31.0"
   }
