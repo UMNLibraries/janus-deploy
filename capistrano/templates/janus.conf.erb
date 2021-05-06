@@ -23,3 +23,11 @@ Alias /<%= fetch(:application) %> <%= fetch(:deploy_to) %>/current/public
   # settings, but the rewritten request doesn't."
   # -- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig
 </Location>
+
+# Temporary support for ?params=targetvalue|scopevalue
+RewriteEngine ON
+# Do not apply this if a target= was already received
+RewriteCond %{THE_REQUEST} !target=
+# Support encoded %7C (insensitive) or | delimited params=target|scope
+RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:\%7[Cc]|\|)([^&]*)"
+RewriteRule ^/<%= fetch(:application) %> /<%= fetch(:application) %>?target=%1&scope=%2 [L,R=301,QSA]

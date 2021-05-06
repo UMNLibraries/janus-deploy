@@ -1,6 +1,6 @@
 set :application, 'janus'
 set :repo_url, 'git@github.com:UMNLibraries/janus-deploy.git'
-set :branch, 'master'
+set :branch, 'main'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
