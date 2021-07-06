@@ -30,4 +30,4 @@ RewriteEngine ON
 RewriteCond %{THE_REQUEST} !target=
 # Support encoded %7C (insensitive) or | delimited params=target|scope
 RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:\%7[Cc]|\|)([^&]*)"
-RewriteRule ^/<%= fetch(:application) %> /<%= fetch(:application) %>?target=%1&scope=%2 [L,R=301,QSA]
+RewriteRule ^/<%= fetch(:application) %> /<%= fetch(:application) %>?target=%1&scope=%2 [L,R=301,QSA,NE]
