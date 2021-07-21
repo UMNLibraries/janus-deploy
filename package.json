@@ -26,13 +26,13 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "playwright": "^1.10.0",
+    "playwright": "^1.12.3",
     "standard": "^14.3.4",
     "tape": "^5.0.0"
   },
   "dependencies": {
-    "@nihiliad/janus": "^2.1.0",
-    "@nihiliad/janus-uri-factory-plugins": "^2.1.0",
+    "@nihiliad/janus": "^2.1.1",
+    "@nihiliad/janus-uri-factory-plugins": "^2.1.1",
     "config": "^1.31.0"
   }
 }
