@@ -44,6 +44,7 @@ set :deploy_to, "/swadm/var/www/deploy/#{fetch(:application)}"
 
 # NodeJS path
 set :nodejs_exe, '/swadm/bin/node'
+set :max_http_header_size, 16384
 
 # Default is :app, but we need to ensure that we restart
 # passenger on all instances of apache, and we use the :web
@@ -76,6 +77,11 @@ set(:templates, [
     from: 'templates/janus-logrotate.ini.erb',
     to: 'config/janus-logrotate.ini',
     mode: '0644'
+  },
+  {
+    from: 'templates/node-janus-startup.sh.erb',
+    to: 'bin/node-janus-startup.sh',
+    mode: '0755'
   },
 ])
 set :templates_roles, [:app]

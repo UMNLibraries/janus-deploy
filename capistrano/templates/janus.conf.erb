@@ -2,7 +2,8 @@
 PassengerAppEnv <%= fetch(:stage) %>
 Alias /<%= fetch(:application) %> <%= fetch(:deploy_to) %>/current/public
 <Directory <%= fetch(:deploy_to) %>/current/public>
-  PassengerNodejs <%= fetch(:nodejs_exe) %>
+  # Invoke node wrapper script
+  PassengerNodejs <%= fetch(:release_path) %>/bin/node-janus-startup.sh
   PassengerAppRoot <%= fetch(:deploy_to) %>/current
   PassengerBaseURI /<%= fetch(:application) %>
 
@@ -31,3 +32,6 @@ RewriteCond %{THE_REQUEST} !target=
 # Support encoded %7C (insensitive) or | delimited params=target|scope
 RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:\%7[Cc]|\|)([^&]*)"
 RewriteRule ^/<%= fetch(:application) %> /<%= fetch(:application) %>?target=%1&scope=%2 [L,R=301,QSA,NE]
+
+# Large headers like cumulative Set-Coookie strings may exceed Apache's default limit
+LimitRequestFieldSize <%= fetch(:max_http_header_size) %>
