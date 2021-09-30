@@ -1,0 +1,6 @@
+#!/bin/sh
+# Startup node with command line args, not normally possible via
+# Passenger's directive PassengerNodeJS /path/to/node
+# Invoke this with Passenger as:
+# PassengerNodeJS /path/to/node-janus-startup.sh
+exec <%= fetch(:nodejs_exe) %> --max-http-header-size=<%= fetch(:max_http_headers_size) %> "$@"
