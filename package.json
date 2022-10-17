@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@nihiliad/janus": "^2.1.1",
-    "@nihiliad/janus-uri-factory-plugins": "^2.2.0",
+    "@nihiliad/janus-uri-factory-plugins": "github:UMNLibraries/janus-uri-factory-plugins#primo-updates",
     "config": "^3.3.6"
   }
 }
