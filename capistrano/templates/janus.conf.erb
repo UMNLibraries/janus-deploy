@@ -25,14 +25,21 @@ Alias /<%= fetch(:application) %> <%= fetch(:deploy_to) %>/current/public
   # -- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig
 </Location>
 
-# Temporary support for ?params=targetvalue|scopevalue
+# Temporary support for ?params=targetvalue|scopevalue|formatvalue
 RewriteEngine ON
-# Do not apply this if a target= was already received
+# Do not apply this if a target= was already received, or it will loop
 RewriteCond %{THE_REQUEST} !target=
-# Support encoded %7C (insensitive) or | delimited params=target|scope|format
-# If only a target is supplied, you must leave a trailing |, e.g. params=primo|&search=election
-RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:\%7[Cc]|\|)([^&\|]*)(?:(?:\%7[Cc]|\|)([^&]*))*"
-RewriteRule ^/<%= fetch(:application) %> /<%= fetch(:application) %>?target=%1&scope=%2&format=%3 [L,R=301,QSA,NE]
+# Support encoded %7C (insensitive) or | delimited params=target||format
+# Initial match is for format with empty scope - meaning it will have consecutive
+# || or %7C%7C in the middle
+RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:(?:\%7[Cc]\%7[Cc])|(?:\|\|))([^&]*)"
+RewriteRule ^/janus /janus?target=%1&format=%2 [L,R=301,QSA,NE]
+
+# Needed again because RewriteCond only attach to the immediately next rule
+RewriteCond %{THE_REQUEST} !target=
+# Second match handles empty or nonempty scope with empty or nonempty format
+RewriteCond %{QUERY_STRING} "params=([A-Za-z_]+)(?:\%7[Cc]|\|)([A-Za-z0-9_.+ -]*)(?:(?:\%7[Cc]|\|)([^&]*))*"
+RewriteRule ^/janus /janus?target=%1&scope=%2&format=%3 [L,R=301,QSA,NE]
 
 # Large headers like cumulative Set-Coookie strings may exceed Apache's default limit
 LimitRequestFieldSize <%= fetch(:max_http_header_size) %>
