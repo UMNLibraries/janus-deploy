@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@nihiliad/janus": "^2.1.1",
-    "@nihiliad/janus-uri-factory-plugins": "^3.0.1",
+    "@nihiliad/janus-uri-factory-plugins": "^3.1.0",
     "config": "^3.3.6"
   }
 }
