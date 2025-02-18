@@ -2,7 +2,7 @@
   "uriPathPrefix": "/janus",
   "node": {
     "host": "localhost",
-    "port": 80
+    "port": 8080
   },
   "log": {
     //"redirect": "/swadm/var/www/deploy/janus/shared/log/redirect.json",
