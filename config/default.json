@@ -1,0 +1,13 @@
+{
+  "uriPathPrefix": "/janus",
+  "node": {
+    "host": "localhost",
+    "port": 80
+  },
+  "log": {
+    //"redirect": "/swadm/var/www/deploy/janus/shared/log/redirect.json",
+    //"error": "/swadm/var/www/deploy/janus/shared/log/error.json"
+    "redirect": "./log/redirect.json",
+    "error": "./log/error.json"
+  }
+}

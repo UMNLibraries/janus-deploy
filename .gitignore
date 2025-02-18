@@ -1,5 +1,5 @@
 # Janus-specific
-config/default.json
+#config/default.json
 log/*.json
 
 # Logs
