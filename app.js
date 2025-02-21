@@ -34,7 +34,7 @@ const app = janus({
       level: 'info',
       path: redirectLogFile,
       type: 'rotating-file',
-      period: '1h',
+      period: '1d',
       count: 4
     }]
   },
