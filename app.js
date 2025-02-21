@@ -32,7 +32,10 @@ const app = janus({
     name: 'redirect',
     streams: [{
       level: 'info',
-      path: redirectLogFile
+      path: redirectLogFile,
+      type: 'rotating-file',
+      period: '1h',
+      count: 4
     }]
   },
   uriPathPrefix: uriPathPrefix
