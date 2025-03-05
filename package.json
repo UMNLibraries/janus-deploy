@@ -26,13 +26,17 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "playwright": "^1.14.0",
-    "standard": "^16.0.3",
-    "tape": "^5.3.1"
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "globals": "^16.0.0",
+    "playwright": "^1.50.1",
+    "standard": "^17.1.2",
+    "tape": "^5.9.0",
+    "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
-    "@nihiliad/janus": "^2.1.1",
-    "@nihiliad/janus-uri-factory-plugins": "3.3.0",
-    "config": "^3.3.6"
+    "janus": "git+ssh://git@github.com:UMNLibraries/janus.git#az",
+    "janus-uri-factory-plugins": "git+ssh://git@github.com:UMNLibraries/janus-uri-factory-plugins.git#az",
+    "config": "^3.3.12"
   }
 }
