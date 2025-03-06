@@ -6,8 +6,8 @@ const port = (config.has('node.port')) ? config.get('node.port') : 1337
 const errorLogFile = (config.has('log.error')) ? config.get('log.error') : path.resolve(__dirname, 'log/error.json')
 const redirectLogFile = (config.has('log.redirect')) ? config.get('log.redirect') : path.resolve(__dirname, 'log/redirect.json')
 
-const uriFactoryPlugins = require('@nihiliad/janus-uri-factory-plugins')
-const janus = require('@nihiliad/janus').methods({
+const uriFactoryPlugins = require('janus-uri-factory-plugins')
+const janus = require('janus').methods({
   redirectLogEvent (ctx, defaultEvent) {
     ['umnLibAccess', 'umnRole'].map(key => {
       const lcKey = key.toLowerCase()
