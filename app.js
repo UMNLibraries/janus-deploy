@@ -1,23 +1,27 @@
-'use strict'
-const path = require('path')
-const config = require('config')
-const uriPathPrefix = (config.has('uriPathPrefix')) ? config.get('uriPathPrefix') : '/'
-const port = (config.has('node.port')) ? config.get('node.port') : 1337
-const errorLogFile = (config.has('log.error')) ? config.get('log.error') : path.resolve(__dirname, 'log/error.json')
-const redirectLogFile = (config.has('log.redirect')) ? config.get('log.redirect') : path.resolve(__dirname, 'log/redirect.json')
+'use strict';
+import path from 'path';
+import config from 'config';
+import { fileURLToPath, pathToFileURL } from "url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const uriPathPrefix = (config.has('uriPathPrefix')) ? config.get('uriPathPrefix') : '/';
+const port = (config.has('node.port')) ? config.get('node.port') : 1337;
+const errorLogFile = (config.has('log.error')) ? config.get('log.error') : path.resolve(__dirname, 'log/error.json');
+const redirectLogFile = (config.has('log.redirect')) ? config.get('log.redirect') : path.resolve(__dirname, 'log/redirect.json');
 
-const uriFactoryPlugins = require('janus-uri-factory-plugins')
-const janus = require('janus').methods({
+import uriFactoryPlugins from 'janus-uri-factory-plugins';
+import janus from 'janus';
+
+janus.methods({
   redirectLogEvent (ctx, defaultEvent) {
     ['umnLibAccess', 'umnRole'].map(key => {
-      const lcKey = key.toLowerCase()
+      const lcKey = key.toLowerCase();
       defaultEvent.user[key] = (ctx.request.header[lcKey])
         ? ctx.request.header[lcKey].split(';').filter((i) => i.length > 0)
-        : []
-    })
-    return defaultEvent
+        : [];
+    });
+    return defaultEvent;
   }
-})
+});
 
 const app = janus({
   uriFactoryPlugins: uriFactoryPlugins,
@@ -39,5 +43,5 @@ const app = janus({
     }]
   },
   uriPathPrefix: uriPathPrefix
-})
-app.listen(port)
+});
+app.listen(port);

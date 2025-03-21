@@ -7,7 +7,9 @@
   "log": {
     //"redirect": "/swadm/var/www/deploy/janus/shared/log/redirect.json",
     //"error": "/swadm/var/www/deploy/janus/shared/log/error.json"
-    "redirect": "/home/LogFiles/redirect.json",
-    "error": "/home/LogFiles/error.json"
+    //"redirect": "/home/LogFiles/redirect.json",
+    //"error": "/home/LogFiles/error.json"
+      "error": "/Users/barne102/devprojects/janus-deploy/log/redirect.json",
+      "redirect": "/Users/barne102/devprojects/janus-deploy/log/redirect.json"
   }
 }
