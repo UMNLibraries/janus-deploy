@@ -9,5 +9,7 @@
     //"error": "/swadm/var/www/deploy/janus/shared/log/error.json"
     "redirect": "/home/LogFiles/redirect.json",
     "error": "/home/LogFiles/error.json"
+    //"error": "/Users/barne102/devprojects/LogFiles/error.json",
+    //"redirect": "/Users/barne102/devprojects/LogFiles/redirect.json"
   }
 }
