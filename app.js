@@ -30,6 +30,9 @@ const app = janus({
     streams: [{
       level: 'info',
       path: errorLogFile
+      type: 'rotating-file',
+      period: '1d',
+      count: 14
     }]
   },
   redirectLog: {
@@ -39,7 +42,9 @@ const app = janus({
       path: redirectLogFile,
       type: 'rotating-file',
       period: '1d',
-      count: 4
+      // keep a lot of these in case the proxy-stats log collector fails
+      // to retrieve them for a while.
+      count: 30
     }]
   },
   uriPathPrefix: uriPathPrefix
