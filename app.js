@@ -29,7 +29,7 @@ const app = janus({
     name: 'error',
     streams: [{
       level: 'info',
-      path: errorLogFile
+      path: errorLogFile,
       type: 'rotating-file',
       period: '1d',
       count: 14
